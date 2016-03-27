@@ -16,16 +16,16 @@
             <div id="display">
                 <div id="display_area">
                     <div id="map">
-                        <canvas style="background-color: red;"  width="300" height="300" id="canvas"></canvas>
+                        <canvas width="300" height="300" id="canvas"></canvas>
                     </div>
 
                 </div>
                 <div id=context_menu>
                     <!--max value means secure/locked/dimmed aka lowest positon on slider !-->
                     <div id="door_div" class="context_hidden current">
-                        <input type="range" min=0 max=1 step=1 data-index="0">
-                        <input type="range" min=0 max=1 step=1 data-index="1">
-                        <input class="master" type="range">
+                        <input type="range" min=0 max=1 step=1 data-index="0" value="0">
+                        <input type="range" min=0 max=1 step=1 data-index="1" value="0">
+                        <input class="master" type="range" min=0 max=1 step=1 value="0">
                         
                     </div>
                     <div id="window_div" class="context_hidden">
@@ -47,7 +47,7 @@
                         <input class="master" type="range"  min=0 max=255 step=5>
                     </div>
                     <div id="temperature_div" class="context_hidden">
-                        <input type="range" min=0 max=100 step=1 class="master" style="">
+                        <input type="range" min=40 max=90 step=1 class="master" style="">
                     </div>
                 </div>
             </div>

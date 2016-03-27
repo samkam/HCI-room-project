@@ -4,10 +4,10 @@
 var objects ={
     light: [
          {x:15,y:25,r:5,color:"rgb(0,0,0)"},
-         {x:40,y:150,r:5,color:"rgb(0,0,0)"},
+         {x:50,y:150,r:5,color:"rgb(0,0,0)"},
          {x:109,y:74,r:5,color:"rgb(0,0,0)"},
-         {x:123,y:280,r:5,color:"rgb(0,0,0)"},
-         {x:260,y:180,r:5,color:"rgb(0,0,0)"},
+         {x:180,y:280,r:5,color:"rgb(0,0,0)"},
+         {x:245,y:180,r:5,color:"rgb(0,0,0)"},
          {x:280,y:40,r:5,color:"rgb(0,0,0)"}
     ],
     window: [
@@ -20,10 +20,11 @@ var objects ={
         {main_x:295,main_y:100,main_w:11,main_h:41,inner_x:0,inner_y:0,inner_w:11,inner_h:41}
     ],
     door: [
-        {x:2,y:55, w:0,h:0, locked:true},
-        {x:265,y:5, w:0,h:0, locked:true}
+        {x:0,y:64, w:0,h:0, locked:true},
+        {x:265,y:20, w:0,h:0, locked:true}
     ],
-    temperature:40
+    temperature:40,
+    temp_target:40
 };
 $(document).ready(function(){
     //initialize all sliders to 0
@@ -34,18 +35,8 @@ $(document).ready(function(){
     var background = new Image();
     background.src = "room.png";
     //load imagaes
-    var locked = new Image();
-    locked.src = "locked.png";
-    var unlocked = new Image();
-    unlocked.src = "unlocked.png";
     background.onload = function() {
         refresh_canvas();  
-        locked.onload = function() {
-            refresh
-          unlocked.onload = function() {
-            refresh_canvas();  
-          };
-        };
     };
     //event listener for main buttons
     $("#select_menu").on("click",function(e) {
@@ -56,7 +47,6 @@ $(document).ready(function(){
         $(".context_hidden").removeClass("current");
         var id = "#"+caller+"_div";
         $(id).addClass("current");
-            refresh_canvas();
     });
     
     //looks for input from sliders
@@ -67,6 +57,7 @@ $(document).ready(function(){
         
         //checks to see if master switch is caller
         if($(this).hasClass("master") && obj_type != "temperature"){
+                        console.log(this);
             var master_val = Number($(this).val());
             $(this).parent().children().each(function() {
                 //update all relevant switches
@@ -78,26 +69,43 @@ $(document).ready(function(){
             
         }
         else{
+            console.log(this);
             update_obj(this.value,obj_type,index);
         }
         refresh_canvas();
     });
-    $(".context_hidden.current").on(change,function(e) {
+    $(".context_hidden.current").onchange(function(e) {
         var caller = e.target.getAttribute("id");
     });
 
 
 });
+function panic(){
+    $("input.master").each(function(){
+        $(this).attr("value", $(this).attr("min"));
+        var parent = $(this).parent();
+        var obj_type = parent.attr('id').replace("_div","");
+        var index = $(this).attr('data-index');
+        if($(this).hasClass("master") && this.id != "temperature"){
+            $(this).parent().children().each(function() {
+                this.value =$(this).attr("value");
+                update_obj(this.value,obj_type,Number(this.getAttribute('data-index')));
+            });
+            
+        }
+        else{
+            update_obj(this.value,obj_type,index);
+        }
+    });
+    refresh_canvas();
+}
 function refresh_canvas(){
+    update_temp(objects.temp_target, NaN);//increments temperature
     var c = document.getElementById("canvas");
     var ctx = c.getContext("2d");
     var background= new Image();
     background.src = "room.png";
     ctx.drawImage(background,0,0,300,300);
-    var locked = new Image();
-    locked.src = "locked.png";
-    var unlocked = new Image();
-    unlocked.src = "unlocked.png";
     ctx.beginPath();
     
     //draw lights
@@ -120,27 +128,41 @@ function refresh_canvas(){
         ctx.fillStyle = gradient;
         ctx.fillRect(t.main_x,t.main_y,t.main_w,t.main_h);
         ctx.beginPath();
+    
         
         ctx.rect(t.main_x,t.main_y,t.inner_w,t.inner_h);
-        ctx.fillStyle = "green";
+        ctx.fillStyle = "#1b344b";//"green";
         ctx.fill();
         ctx.beginPath();
         
     }
     //doors
+    ctx.font="20px Arial";
+    ctx.fillStyle="black";
     for (var i =0; i<objects.door.length; i+=1){
         var d = objects.door[i];
-        var charcode = "";// variable for representing unicode
         if(d.locked){
-            ctx.drawImage(locked,d.x,d.y,30,20);}
-        else{ctx.drawImage(unlocked,d.x,d.y,30,20);}
+            ctx.fillText(String.fromCodePoint(0x1F512)+"--", d.x,d.y);}   
+            //ctx.drawImage(locked,d.x,d.y,30,20);}
+        else{ctx.fillText(String.fromCodePoint(0x1F513)+"", d.x,d.y);}
         ctx.beginPath();
     }
     //draw temperature
-    ctx.fillText(String(objects.temperature)+ " degrees",15,280);
+    //determine if temp is increasing or decreasing
+    ctx.font="16px Arial";
+    var temp_symbol = "";
+    var degree=String.fromCodePoint(176);
+    if(objects.temp_target == objects.temperature){
+        var tmp =String(objects.temperature)+degree;
+        ctx.fillText(tmp,5,280);    
+    }
+    else{
+        var tmp = String(objects.temperature)+degree+String.fromCodePoint(10144)+String(objects.temp_target)+degree;
+        ctx.fillText(tmp,5,280);
+    }
 }
 function update_obj(slider_val,obj_type, index){
-    
+    console.log(arguments);
     if(obj_type =="window"){
         update_window(slider_val,index)
     }
@@ -155,7 +177,6 @@ function update_obj(slider_val,obj_type, index){
     }
 }
 function update_light(slider_val, index){
-    console.log("in update light");
     var new_color = "rgb("+slider_val+","+slider_val+",0)";
     objects.light[index].color= new_color;
 }
@@ -170,17 +191,17 @@ function update_window(slider_val, index){
     }
 }
 function update_temp(slider_val, index){
-
-    objects.temperature = slider_val;
+    objects.temp_target = slider_val;
+    if(objects.temperature > objects.temp_target){objects.temperature -=1;}
+    else if(objects.temperature < objects.temp_target){objects.temperature +=1;}
+    
 }
 function update_door(slider_val, index){
+    console.log(arguments);
     if(slider_val==0){
         objects.door[index].locked=true;
     }
     else{
         objects.door[index].locked=false;
     }
-}
-function panic(){
-    window.alert("please don't panic");
 }
