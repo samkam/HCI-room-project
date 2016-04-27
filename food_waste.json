@@ -1,0 +1,186 @@
+{
+	"values": {
+		"environment": [
+			"Wasted food goes into landfills; organic matter accounts for 23% of US methane emissions. Methane is 21 times more potent than CO2 as a greenhouse gas. In the UK, removing food scraps from landfills equates to removing ⅕ of cars from the road in terms of greenhouse gas abatement. ",
+			" 25% of total US freshwater use is wasted on food that goes uneaten; this equates to 87,250 million gallons per day",
+			" Agriculture accounts for 50% of US land use. On average, 7% of crops are not harvested - this equates to about 64,000,000 acres",
+			"Food production releases hundreds of millions of pounds of pesticides into the environment each year, and is the leading cause of freshwater pollution. Fertilizer pollution leads to harmful algae blooms in both freshwater and saltwater, destroying native communities."
+		],
+		"money": [
+			"The annual cost of food waste in American households is $43,052,480,000",
+			"Food losses during harvest and in storage translate into lost income for small farmers and into higher prices for poor consumers",
+			"Average American home wastes $500 to $2000 of food each year (Food loss costs a family of four at least $589.76 annually",
+			"fact4"
+		],
+		"hunger": [
+			"The U.N. Food and Agriculture Organization estimates that about one in nine (795 million people) were suffering from chronic undernourishment in 2014-2016. 780 million live in developing countries,about 13 percent of those countries' populations.",
+			"The world produces enough food to feed everyone. per capita, even developing countries produce 2640 kcal/person/day. the problem is Many people in the world still do not have sufficient income to purchase (or land to grow) enough food.",
+			"their are two types of malnutrtition. First is protein energy deficiency (lack of caloric intake and protein), and the second is micronutrient defiency (lack of vitamins and minerals, especially iron, iodine, and vitamin A)",
+			"food donations are not a sustainable solution, only a temporary fix."
+		],
+		"community": [
+
+		]
+	},
+	"roles": {
+		"consumer": [{
+			"loss": "Confusion over label dates",
+			"fix": "Understand expiration dates: “use by” and “best by” labels do not indicate food safety",
+			"impact": {
+				"environment": "",
+				"money": "",
+				"hunger": "",
+				"community": ""
+			}
+		}, {
+			"loss": "Impulse/bulk purchasing",
+			"fix": "Shop wisely: plan meals, use shopping lists, and avoid impulse buys",
+			"impact": {
+				"environment": "",
+				"money": "",
+				"hunger": "",
+				"community": ""
+			}
+		}, {
+			"loss": "Food spoilage - improper storage, misjudged food needs",
+			"fix": "Serve smaller portions and save leftovers",
+			"impact": {
+				"environment": "",
+				"money": "",
+				"hunger": "",
+				"community": ""
+			}
+		}, {
+			"loss": "Over-preparation of meals",
+			"fix": "Freeze ingredients not currently in use.",
+			"impact": {
+				"environment": "",
+				"money": "",
+				"hunger": "",
+				"community": ""
+			}
+		}, {
+			"loss": "Throwing food away",
+			"fix": "compost and grow a garden! buy imperfect produce.",
+			"impact": {
+				"environment": "",
+				"money": "",
+				"hunger": "",
+				"community": ""
+			}
+		}],
+		"retailer": [{
+				"loss": "Culling food based on appearance",
+				"fix": "",
+				"impact": {
+					"environment": "",
+					"money": "",
+					"hunger": "",
+					"community": ""
+				}
+			}, {
+				"loss": "Availability of ready-made food until closing (items like rotisserie chickens get thrown away)",
+				"fix": "Allow prepared foods to run out close to closing",
+				"impact": {
+					"environment": "",
+					"money": "",
+					"hunger": "",
+					"community": ""
+				}
+			}, {
+				"loss": "Expired sell-by dates, almost none of which are regulated by law",
+				"fix": "",
+				"impact": {
+					"environment": "",
+					"money": "",
+					"hunger": "",
+					"community": ""
+				}
+			}, {
+				"loss": "Discarding damaged goods, outdated promotional products (ex: holiday foods), and unpopular items",
+				"fix": "Use discount shelves to sell near-expiration and irregular produce",
+				"impact": {
+					"environment": "",
+					"money": "",
+					"hunger": "",
+					"community": ""
+				}
+			}, {
+				"loss": "Kitchen loss; food prepared but not served",
+				"fix": "Analyze needs at the item level",
+				"impact": {
+					"environment": "",
+					"money": "",
+					"hunger": "",
+					"community": ""
+				}
+			}, {
+				"loss": "Large restaurant portions, undesired accompaniments",
+				"fix": "Encourage guests to take leftovers from their meal",
+				"impact": {
+					"environment": "",
+					"money": "",
+					"hunger": "",
+					"community": ""
+				}
+			}, {
+				"loss": "Chain store management is inflexible",
+				"fix": "Promote cooperation between grocers, restaurant owners, and food donation centers",
+				"impact": {
+					"environment": "",
+					"money": "",
+					"hunger": "",
+					"community": ""
+				}
+			}, {
+				"loss": "Providing extensive menu choices",
+				"fix": "Redesign menus; use specials to flush inventory",
+				"impact": {
+					"environment": "",
+					"money": "",
+					"hunger": "",
+					"community": ""
+				}
+			}
+
+
+		],
+		"producer": [{
+			"loss": "Culling food based on appearance",
+			"fix": "Revise quality standards, especially in terms of aesthetics. Explore alternative outlets and secondary markets for off-grade products",
+			"impact": {
+				"environment": "",
+				"money": "",
+				"hunger": "",
+				"community": ""
+			}
+		}, {
+			"loss": "Food not harvested due to weather, pests, disease, economy (bumper crop - not economically feasible to harvest",
+			"fix": "",
+			"impact": {
+				"environment": "",
+				"money": "",
+				"hunger": "",
+				"community": ""
+			}
+		}, {
+			"loss": "crops are damaged or spoiled during transportation",
+			"fix": "use farmers markets to sell locally",
+			"impact": {
+				"environment": "",
+				"money": "",
+				"hunger": "",
+				"community": ""
+			}
+		}, {
+			"loss": "full harvest cannot be completed due to labor shortages",
+			"fix": "",
+			"impact": {
+				"environment": "",
+				"money": "",
+				"hunger": "",
+				"community": ""
+			}
+		}]
+	}
+}
