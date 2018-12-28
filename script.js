@@ -27,18 +27,18 @@ var objects ={
     temp_target:40
 };
 $(document).ready(function(){
-    //initialize all sliders to 0
+    // initialize all sliders to 0
     $("input").attr("value","0");
-    //initialize canvas
+    // initialize canvas
     var c = document.getElementById("canvas");
     var ctx = c.getContext("2d");
     var background = new Image();
     background.src = "room.png";
-    //load imagaes
+    // load imagaes
     background.onload = function() {
         refresh_canvas();  
     };
-    //event listener for main buttons
+    // event listener for main buttons
     $("#select_menu").on("click",function(e) {
         console.log(event.target);
         $("button").removeClass("current");
@@ -49,18 +49,18 @@ $(document).ready(function(){
         $(id).addClass("current");
     });
     
-    //looks for input from sliders
+    // looks for input from sliders
     $( "input" ).change(function(e) {
         var parent = $(this).parent();
         var obj_type = parent.attr('id').replace("_div","");
         var index = $(this).attr('data-index');
         
-        //checks to see if master switch is caller
+        // checks to see if master switch is caller
         if($(this).hasClass("master") && obj_type != "temperature"){
                         console.log(this);
             var master_val = Number($(this).val());
             $(this).parent().children().each(function() {
-                //update all relevant switches
+                // update all relevant switches
                 if(!(this.className=="master")){
                     this.value = master_val;
                     update_obj(this.value,obj_type,Number(this.getAttribute('data-index')));
@@ -74,12 +74,13 @@ $(document).ready(function(){
         }
         refresh_canvas();
     });
-    $(".context_hidden.current").onchange(function(e) {
+    $(".context_hidden.current").change(function(e) {
         var caller = e.target.getAttribute("id");
     });
 
 
 });
+// panic function shuts all doors, windows, and lights
 function panic(){
     $("input.master").each(function(){
         $(this).attr("value", $(this).attr("min"));
@@ -100,7 +101,7 @@ function panic(){
     refresh_canvas();
 }
 function refresh_canvas(){
-    update_temp(objects.temp_target, NaN);//increments temperature
+    update_temp(objects.temp_target, NaN);
     var c = document.getElementById("canvas");
     var ctx = c.getContext("2d");
     var background= new Image();
@@ -108,7 +109,7 @@ function refresh_canvas(){
     ctx.drawImage(background,0,0,300,300);
     ctx.beginPath();
     
-    //draw lights
+    // draw lights
     for (var i =0; i<objects.light.length; i+=1){
         var t = objects.light[i];
         ctx.arc(t.x,t.y,t.r,0,2*Math.PI);
@@ -117,10 +118,10 @@ function refresh_canvas(){
         ctx.beginPath();
     }
     
-    //draw windows
+    // draw windows
     for (var i =0; i<objects.window.length; i+=1){
         var t = objects.window[i];
-        //create gradient
+        // create gradient
         var gradient = ctx.createLinearGradient(t.main_x,t.main_y,t.main_x+t.main_w,t.main_y+t.main_h);
         gradient.addColorStop(0,"#fffafa");
         gradient.addColorStop(1,"#00afaf");
@@ -131,24 +132,22 @@ function refresh_canvas(){
     
         
         ctx.rect(t.main_x,t.main_y,t.inner_w,t.inner_h);
-        ctx.fillStyle = "#1b344b";//"green";
+        ctx.fillStyle = "#1b344b"; //"green"
         ctx.fill();
         ctx.beginPath();
         
     }
-    //doors
+    // doors
     ctx.font="20px Arial";
     ctx.fillStyle="black";
     for (var i =0; i<objects.door.length; i+=1){
         var d = objects.door[i];
-        if(d.locked){
-            ctx.fillText(String.fromCodePoint(0x1F512)+"--", d.x,d.y);}   
-            //ctx.drawImage(locked,d.x,d.y,30,20);}
+        if(d.locked){ctx.fillText(String.fromCodePoint(0x1F512)+"--", d.x,d.y);}   
         else{ctx.fillText(String.fromCodePoint(0x1F513)+"", d.x,d.y);}
         ctx.beginPath();
     }
-    //draw temperature
-    //determine if temp is increasing or decreasing
+    // draw temperature
+    // determine if temp is increasing or decreasing
     ctx.font="16px Arial";
     var temp_symbol = "";
     var degree=String.fromCodePoint(176);
@@ -156,6 +155,7 @@ function refresh_canvas(){
         var tmp =String(objects.temperature)+degree;
         ctx.fillText(tmp,5,280);    
     }
+    // show current temperature and target temperature
     else{
         var tmp = String(objects.temperature)+degree+String.fromCodePoint(10144)+String(objects.temp_target)+degree;
         ctx.fillText(tmp,5,280);
@@ -181,7 +181,7 @@ function update_light(slider_val, index){
     objects.light[index].color= new_color;
 }
 function update_window(slider_val, index){
-    //vertical case
+    // vertical case
     var window =objects.window[index]; 
     if(index==0 || index==3){
         window.inner_h = window.main_h - window.main_h *(slider_val/2.0); 
